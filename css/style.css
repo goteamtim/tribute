@@ -1,0 +1,19 @@
+body {
+    padding-top: 50px;
+    font-family: 'Suranna', serif;
+     /*font-family: 'Glass Antiqua', cursive;*/
+     background-color: rgba(255, 241, 208, 1);
+}
+
+.navbar-default {
+    background-color: #086788 !important;
+}
+
+#main {
+    background-color: rgba(7, 160, 195, 1);
+    padding-top: 50px;
+}
+
+#navBar {
+    border-bottom-width: 0px;
+}
