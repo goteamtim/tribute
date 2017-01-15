@@ -7,13 +7,19 @@ body {
 
 .navbar-default {
     background-color: #086788 !important;
+    
 }
 
 #main {
     background-color: rgba(7, 160, 195, 1);
     padding-top: 50px;
+    height: 450px;
 }
 
 #navBar {
     border-bottom-width: 0px;
+}
+
+#topThree {
+    background-color: rgba(255, 241, 208, 1);
 }
