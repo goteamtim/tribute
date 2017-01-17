@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html ng-app="tributeApp">
 <head>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-route.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    
+    
     
     <link rel="stylesheet" href="css/style.css">
     <!-- Latest compiled and minified CSS -->
@@ -12,8 +12,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <link href="https://fonts.googleapis.com/css?family=Glass+Antiqua|Suranna" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="js/app.js"></script>
 </head>
 <body>
+    
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom affix-top" id="navBar">
         <div class="container">
             <div class="navbar-header page-scroll"></div>
@@ -37,6 +42,38 @@
             <div class="col-sm-4 col-md-4 col-lg-4"></div>
         </div>
     </div>
+
+    
+        
+
+        <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Welcome!</h4>
+            </div>
+            <div class="modal-body">
+            <p>Enter your Github Username below to get started!</p>
+            <input type="text">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#myModal").modal('show');
+	});
+</script>
 </body>
 
 </html>
