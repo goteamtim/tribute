@@ -43,6 +43,8 @@ app.controller('GitHubController', ['$scope', '$http','$routeParams', function (
           //Need to remove the div here as well
         if ($scope.gitHubUsername) {
           getUserInfo($scope.gitHubUsername);
+          $("#myModal").modal('hide');
+          //Hiding the modal this way works but I might want to setup a callback for when the api calls are all finished so the user has something to look at.
         }else{
             //Notify to user to enter soemthing
         }
