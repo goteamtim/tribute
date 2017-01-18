@@ -19,12 +19,17 @@ app.config(function($routeProvider) {
     
 });
 
+app.factory('userRepos', function(){
+  return { url: '' };
+});
+
 
 app.controller('GitHubController', ['$scope', '$http','$routeParams', function ($scope, $http, $routeParams) {
     $scope.gitHubUsername = '';
     $scope.tributeUserInfo = {};
     $scope.getUserInfo = getUserInfo;
     var imgUrl = '';
+    
     
     function getUserInfo(user) {
         console.log("gettingUserInfo")
@@ -34,9 +39,9 @@ app.controller('GitHubController', ['$scope', '$http','$routeParams', function (
         }).then(function successCallback(response) {
             
             $scope.tributeUserInfo = response;
-            console.log(response.data.avatar_url);
+            console.log(response);
         $scope.imgUrl = response.data.avatar_url;
-        
+        userRepos.url = response.data.repos_url;
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -54,6 +59,10 @@ app.controller('GitHubController', ['$scope', '$http','$routeParams', function (
             //Notify to user to enter soemthing
         }
       };
+}]);
+
+app.controller('repoController',['$scope','$http',function($scope,$http){
+    $scope.reposUrl = userRepos;//use this like reposUrl.url to get the url to make the next call out.
 }]);
 
 
