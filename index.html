@@ -60,7 +60,7 @@
                 <div class="modal-body">
                     
                     
-                    <form ng-submit="submit()">
+                    <form ng-submit="submit()" ng-controller="GitHubController">
                         <p>Enter your Github Username below to get started!</p>
                         <input type="text" ng-model="gitHubUsername" name="gitHubUsername" />
                         <input type="submit" id="submit" value="Submit" />

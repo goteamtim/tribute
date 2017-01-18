@@ -23,7 +23,9 @@ app.config(function($routeProvider) {
 app.controller('GitHubController', ['$scope', '$http','$routeParams', function ($scope, $http, $routeParams) {
     $scope.gitHubUsername = '';
 
-    $scope.getUserInfo = function getUserInfo(user) {
+    $scope.getUserInfo = getUserInfo;
+    
+    function getUserInfo(user) {
         console.log("gettingUserInfo")
         $http({
             method: 'GET',
@@ -34,9 +36,10 @@ app.controller('GitHubController', ['$scope', '$http','$routeParams', function (
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
+    };
 
-        
-      $scope.submit = function() {
+    $scope.submit = function submit() {
+          console.log("submit entered");
           //Need to remove the div here as well
         if ($scope.gitHubUsername) {
           getUserInfo($scope.gitHubUsername);
@@ -44,7 +47,6 @@ app.controller('GitHubController', ['$scope', '$http','$routeParams', function (
             //Notify to user to enter soemthing
         }
       };
-    }
 }]);
 
 
