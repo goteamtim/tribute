@@ -22,8 +22,9 @@ app.config(function($routeProvider) {
 
 app.controller('GitHubController', ['$scope', '$http','$routeParams', function ($scope, $http, $routeParams) {
     $scope.gitHubUsername = '';
-
+    $scope.tributeUserInfo = {};
     $scope.getUserInfo = getUserInfo;
+    var imgUrl = '';
     
     function getUserInfo(user) {
         console.log("gettingUserInfo")
@@ -31,7 +32,11 @@ app.controller('GitHubController', ['$scope', '$http','$routeParams', function (
             method: 'GET',
             url: 'http://api.github.com/users/' + user
         }).then(function successCallback(response) {
-            console.log(response);
+            
+            $scope.tributeUserInfo = response;
+            console.log(response.data.avatar_url);
+        $scope.imgUrl = response.data.avatar_url;
+        
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.

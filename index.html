@@ -31,10 +31,11 @@
     <div class="container-fluid" ng-controller="GitHubController">
         <div class="row" id="main">
             <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                <img src="https://avatars.githubusercontent.com/u/1520573?v=3" alt="" class="img-circle" width="200px" height="200px" ng-src="">
+                <img ng-src="{{imgUrl}}" alt="" class="img-circle" width="200px" height="200px" />
                 <div>
                     <h2>Goteamtim</h2>
                     <h4>Loves Javascript and C#. Junior developer.</h4>
+                    <p>{{imgUrl}} fasdf</p>
                 </div>
             </div>
         </div>
@@ -60,7 +61,7 @@
                 <div class="modal-body">
                     
                     
-                    <form ng-submit="submit()" ng-controller="GitHubController">
+                    <form ng-submit="submit()" >
                         <p>Enter your Github Username below to get started!</p>
                         <input type="text" ng-model="gitHubUsername" name="gitHubUsername" />
                         <input type="submit" id="submit" value="Submit" />
