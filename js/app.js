@@ -21,20 +21,29 @@ app.config(function($routeProvider) {
 
 
 app.controller('GitHubController', ['$scope', '$http','$routeParams', function ($scope, $http, $routeParams) {
-    if($routeParams.user != null){
-        alert("UserFound!");
-    }
+    $scope.gitHubUsername = '';
 
     $scope.getUserInfo = function getUserInfo(user) {
+        console.log("gettingUserInfo")
         $http({
             method: 'GET',
             url: 'http://api.github.com/users/' + user
         }).then(function successCallback(response) {
-            
+            console.log(response);
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
+
+        
+      $scope.submit = function() {
+          //Need to remove the div here as well
+        if ($scope.gitHubUsername) {
+          getUserInfo($scope.gitHubUsername);
+        }else{
+            //Notify to user to enter soemthing
+        }
+      };
     }
 }]);
 
