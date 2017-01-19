@@ -1,6 +1,20 @@
 
 
-var app = angular.module('tributeApp', ["ngRoute"]);
+var app = angular.module('tributeApp', ["ngRoute"])
+.factory('gitHubInfo', function () {
+        
+        var username = '';
+
+        return {
+            getUsername: function(){
+                return username;
+            },
+            setUsername: function(name){
+                username = name;
+            }
+        }
+        
+});;
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -19,20 +33,19 @@ app.config(function($routeProvider) {
     
 });
 
-app.factory('userRepos', function(){
-  return { url: '' };
-});
 
-
-app.controller('GitHubController', ['$scope', '$http','$routeParams', function ($scope, $http, $routeParams) {
-    $scope.gitHubUsername = '';
+app.controller('GitHubController', ['$scope', '$http','$routeParams','gitHubInfo', function ($scope, $http, $routeParams, gitHubInfo) {
+    //$scope.gitHubUsername = '';
     $scope.tributeUserInfo = {};
     $scope.getUserInfo = getUserInfo;
     var imgUrl = '';
+    //$scope.userRepos = {};
     
     
     function getUserInfo(user) {
         console.log("gettingUserInfo")
+        
+        gitHubInfo.setUsername(user);
         $http({
             method: 'GET',
             url: 'http://api.github.com/users/' + user
@@ -41,7 +54,6 @@ app.controller('GitHubController', ['$scope', '$http','$routeParams', function (
             $scope.tributeUserInfo = response;
             console.log(response);
         $scope.imgUrl = response.data.avatar_url;
-        userRepos.url = response.data.repos_url;
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -61,9 +73,16 @@ app.controller('GitHubController', ['$scope', '$http','$routeParams', function (
       };
 }]);
 
-app.controller('repoController',['$scope','$http',function($scope,$http){
-    $scope.reposUrl = userRepos;//use this like reposUrl.url to get the url to make the next call out.
+app.controller('repoController',['$scope','$http','gitHubInfo', function($scope,$http, gitHubInfo){
+    //$scope.reposUrl = userRepos.getProperty();//use this like reposUrl.url to get the url to make the next call out.
+    var username = gitHubInfo.getUsername();
+    $http({
+            method: 'GET',
+            url: 'http://api.github.com/users/' + username.username + '/repos'
+        }).then(function successCallback(response) {
+            console.log(response)
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
 }]);
-
-
-		
