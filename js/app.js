@@ -110,7 +110,8 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                 method: 'GET',
                 url: 'http://api.github.com/users/' + GhUser + '/repos'
             }).then(function successCallback(response) {
-                $scope.repos = response;
+                $scope.repos = response.data;
+                console.log(response.data);
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
