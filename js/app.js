@@ -110,7 +110,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         console.log("Getting Repos from the Repo controller");
         $http({
                 method: 'GET',
-                url: 'http://api.github.com/users/' + GhUser + '/repos'
+                url: 'http://api.github.com/users/' + GhUser + '/repos?sort=updated'
             }).then(function successCallback(response) {
                 $scope.repos = response.data;
                 console.log(response.data);
