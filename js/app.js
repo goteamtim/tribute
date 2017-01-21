@@ -77,10 +77,12 @@ app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubIn
             gitHubInfo.setUserInfo(response);
             $rootScope.getRepos(user);
             $scope.imgUrl = response.data.avatar_url;
+            $("#myModal").modal('hide');
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
             console.log('User Not Found')
+            //$("#myModal").modal('show');
             alert("User Not Found!")
             //Reload the page or something here
         });
@@ -91,7 +93,7 @@ app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubIn
         //Need to remove the div here as well
         if ($scope.gitHubUsername) {
             getUserInfo($scope.gitHubUsername);
-            $("#myModal").modal('hide');
+            
             //Hiding the modal this way works but I might want to setup a callback for when the api calls are all finished so the user has something to look at.
         } else {
             //Notify to user to enter soemthing

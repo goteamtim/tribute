@@ -1,6 +1,6 @@
 body {
     padding-top: 50px;
-    font-family: 'Suranna', serif;
+    font-family: 'Suranna', serif !important;
      /*font-family: 'Glass Antiqua', cursive;*/
      background-color: rgba(255, 241, 208, 1);
 }
