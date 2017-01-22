@@ -114,6 +114,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             }).then(function successCallback(response) {
                 $scope.repos = response.data;
                 console.log(response.data);
+                $scope.$apply;
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.

@@ -39,6 +39,14 @@
                 </div>
             </div>
         </div>
+        <div class="row" ng-controller="repoController" ng-model="repos">
+            <div class="col-md-4">
+                <p>Here is a look at what I have been working on lately!  I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}}</p>
+            </div>
+            <div class="col-md-8">
+                {{repos[1]}}
+            </div>
+        </div>
         <div class="row text-center" id="topThree" ng-controller="repoController">
             <div class="col-md-12 text-center">
                 <h1>Repositories</h1>
