@@ -1,8 +1,16 @@
 body {
     padding-top: 50px;
-    font-family: 'Suranna', serif !important;
+    
      /*font-family: 'Glass Antiqua', cursive;*/
      background-color: rgba(255, 241, 208, 1);
+}
+
+h2, h1 {
+    font-family: 'Alfa Slab One', cursive !important;
+}
+
+p, h4 {
+    font-family: 'Gentium Book Basic', serif !important;
 }
 
 .navbar-default {

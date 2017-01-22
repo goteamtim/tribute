@@ -113,13 +113,14 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                 url: 'http://api.github.com/users/' + GhUser + '/repos?sort=updated'
             }).then(function successCallback(response) {
                 $scope.repos = response.data;
-                console.log(response.data);
-                $scope.$apply;
+                console.log(response.data[0]);
+                
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
                 alert("Error:  " + response)
             });
     }
+    
 
 }]);

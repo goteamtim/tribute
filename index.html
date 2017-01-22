@@ -15,6 +15,8 @@
         crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Glass+Antiqua|Suranna" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
@@ -33,21 +35,23 @@
             <div class="col-sm-12 col-md-12 col-lg-12 text-center">
                 <img ng-src="{{imgUrl}}" alt="" class="img-circle" width="200px" height="200px" />
                 <div>
-                    <h2>{{tributeUserInfo.data.name}}</h2>
-                    <h4>{{tributeUserInfo.data.bio}}</h4>
+                    <h1>{{tributeUserInfo.data.name}}</h1>
+                    <h3>{{tributeUserInfo.data.bio}}</h3>
                     
                 </div>
             </div>
         </div>
-        <div class="row" ng-controller="repoController" ng-model="repos">
+        <div ng-controller="repoController">
+        <div class="row" >
             <div class="col-md-4">
-                <p>Here is a look at what I have been working on lately!  I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}}</p>
+                <p>Here is a look at what I have been working on lately!  I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}}.  </p>
             </div>
             <div class="col-md-8">
-                {{repos[1]}}
+                <h2>{{repos[0].name}}</h2>
+                <h4 style="width:500px;" class="text-center">{{repos[0].description}}</h4>
             </div>
         </div>
-        <div class="row text-center" id="topThree" ng-controller="repoController">
+        <div class="row text-center" id="topThree">
             <div class="col-md-12 text-center">
                 <h1>Repositories</h1>
             </div>
@@ -55,6 +59,7 @@
                 <a href="{{repo.url}}">{{repo.name}}</a>
                 <!-- Try and get stats on the repo so you can display.  maybe add ability to filter by language? -->
             </div>
+        </div>
         </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
