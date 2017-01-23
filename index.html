@@ -36,7 +36,7 @@
                 <img ng-src="{{imgUrl}}" alt="" class="img-circle" width="200px" height="200px" />
                 <div>
                     <h1>{{tributeUserInfo.data.name}}</h1>
-                    <h3>{{tributeUserInfo.data.bio}}</h3>
+                    <h3  style="padding-left: 25%; padding-right: 25%;" class="text-center">{{tributeUserInfo.data.bio}}</h3>
                     
                 </div>
             </div>
@@ -44,11 +44,11 @@
         <div ng-controller="repoController">
         <div class="row" >
             <div class="col-md-4">
-                <p>Here is a look at what I have been working on lately!  I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}}.  </p>
+                <p>I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}} which has been keeping me busy.  {{repos[0].name}} is written mainly in {{repos[0].language}}.</p>
             </div>
             <div class="col-md-8">
-                <h2>{{repos[0].name}}</h2>
-                <h4 style="width:500px;" class="text-center">{{repos[0].description}}</h4>
+                <h1>{{repos[0].name}}</h1>
+                <h3 style="width:500px;" class="text-center">{{repos[0].description}}</h3>
             </div>
         </div>
         <div class="row text-center" id="topThree">
