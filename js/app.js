@@ -142,6 +142,17 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         }
         
     }
+
+    Object.prototype.addObject = function (newObject){
+        for(var language in newObject){
+            if(this.hasOwnProperty(language)){
+                //The property exisis, add the newObject value to this
+                this[language] += newObject.language;
+            }else{
+                this[language] = newObject.language;
+            }
+        }
+    }
     
 
 }]);
