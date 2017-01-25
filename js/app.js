@@ -106,6 +106,9 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     var username = gitHubInfo.getUsername();
     $scope.repos = [];
     $rootScope.getRepos = getRepos;
+    $scope.languages = {};
+    $scope.languageArray = [];
+    $scope.getLanguagesData = getLanguagesData;
     function getRepos(GhUser){
         console.log("Getting Repos from the Repo controller");
         $http({
@@ -114,12 +117,30 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             }).then(function successCallback(response) {
                 $scope.repos = response.data;
                 console.log(response.data[0]);
-                
+                getLanguagesData(response.data);
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
                 alert("Error:  " + response)
             });
+    }
+
+    function getLanguagesData(repos) {
+        for (var i = 0, repoLen = repos.length; i < repoLen; i++) {
+            $http({
+                method: 'GET',
+                url: repos[i].languages_url
+
+            }).then(function successCallback(response){
+                $scope.languageArray.push(response.data);
+                console.count('Language Added');
+                
+            }, function errCallback(){
+
+            });
+            
+        }
+        
     }
     
 
