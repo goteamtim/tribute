@@ -133,8 +133,8 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
 
             }).then(function successCallback(response){
                 $scope.languageArray.push(response.data);
-                console.count('Language Added');
-                
+                //console.count('Language Added');
+                //$scope.languages.addObject(response.data);
             }, function errCallback(){
 
             });
@@ -142,7 +142,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         }
         
     }
-
+    /*
     Object.prototype.addObject = function (newObject){
         for(var language in newObject){
             if(this.hasOwnProperty(language)){
@@ -153,6 +153,6 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             }
         }
     }
-    
+    */
 
 }]);
