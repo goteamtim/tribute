@@ -41,7 +41,9 @@
                 </div>
             </div>
         </div>
+        
         <div ng-controller="repoController">
+            <!-- LAST UPDATED REPO -->
         <div class="row" >
             <div class="col-md-4">
                 <p>I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}} which has been keeping me busy.  {{repos[0].name}} is written mainly in {{repos[0].language}}.</p>
@@ -49,8 +51,12 @@
             <div class="col-md-8">
                 <h1>{{repos[0].name}}</h1>
                 <h3 style="width:500px;" class="text-center">{{repos[0].description}}</h3>
+                <!-- See if you can get the readme file loaded here?  Could be cool to get data from? -->
             </div>
         </div>
+        <!-- LAST UPDATED REPO -->
+
+        <!-- REPOS -->
         <div class="row text-center" id="topThree">
             <div class="col-md-12 text-center">
                 <h1>Repositories</h1>
@@ -60,7 +66,9 @@
                 <!-- Try and get stats on the repo so you can display.  maybe add ability to filter by language? -->
             </div>
         </div>
+        <!-- REPOS -->
         </div>
+        
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
