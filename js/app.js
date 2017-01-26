@@ -106,7 +106,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     var username = gitHubInfo.getUsername();
     $scope.repos = [];
     $rootScope.getRepos = getRepos;
-    $scope.languages = {};
+    $scope.languages = new Object();
     $scope.languageArray = [];
     $scope.getLanguagesData = getLanguagesData;
     function getRepos(GhUser){
@@ -134,7 +134,8 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             }).then(function successCallback(response){
                 $scope.languageArray.push(response.data);
                 //console.count('Language Added');
-                //$scope.languages.addObject(response.data);
+                $scope.languages.addObject(response.data);
+                console.log($scope.languages);
             }, function errCallback(){
 
             });
@@ -142,7 +143,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         }
         
     }
-    /*
+    
     Object.prototype.addObject = function (newObject){
         for(var language in newObject){
             if(this.hasOwnProperty(language)){
@@ -153,6 +154,6 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             }
         }
     }
-    */
+    
 
 }]);
