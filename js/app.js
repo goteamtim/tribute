@@ -151,9 +151,9 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             console.log("typeof: " + typeof(language))
             if(this.hasOwnProperty(language)){
                 //The property exisis, add the newObject value to this
-                this[language] += +newObject.language;
+                this[language] = +this[language] + +newObject.language;
             }else{
-                this[language] = newObject.language;
+                this[language] = +newObject.language;
             }
         }
         console.log(this);
