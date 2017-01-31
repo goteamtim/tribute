@@ -29,14 +29,14 @@ var app = angular.module('tributeApp', ["ngRoute"])
                 repoObject = info;
                 hasData = true;
             },
-            status: function(){
+            status: function () {
                 return hasData;
             }
         }
 
     });
 
-    
+
 
 app.config(function ($routeProvider) {
     $routeProvider
@@ -56,7 +56,7 @@ app.config(function ($routeProvider) {
 });
 
 
-app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubInfo', '$rootScope',function ($scope, $http, $routeParams, gitHubInfo, $rootScope) {
+app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubInfo', '$rootScope', function ($scope, $http, $routeParams, gitHubInfo, $rootScope) {
     //$scope.gitHubUsername = '';
     $scope.tributeUserInfo = {};
     $scope.getUserInfo = getUserInfo;
@@ -93,7 +93,7 @@ app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubIn
         //Need to remove the div here as well
         if ($scope.gitHubUsername) {
             getUserInfo($scope.gitHubUsername);
-            
+
             //Hiding the modal this way works but I might want to setup a callback for when the api calls are all finished so the user has something to look at.
         } else {
             //Notify to user to enter soemthing
@@ -101,7 +101,7 @@ app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubIn
     };
 }]);
 
-app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',function ($scope, $http, gitHubInfo, $rootScope) {
+app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope', function ($scope, $http, gitHubInfo, $rootScope) {
     //$scope.reposUrl = userRepos.getProperty();//use this like reposUrl.url to get the url to make the next call out.
     var username = gitHubInfo.getUsername();
     $scope.repos = [];
@@ -109,20 +109,20 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     $scope.languages = new Object();
     $scope.languageArray = [];
     $scope.getLanguagesData = getLanguagesData;
-    function getRepos(GhUser){
+    function getRepos(GhUser) {
         console.log("Getting Repos from the Repo controller");
         $http({
-                method: 'GET',
-                url: 'http://api.github.com/users/' + GhUser + '/repos?sort=updated'
-            }).then(function successCallback(response) {
-                $scope.repos = response.data;
-                console.log(response.data[0]);
-                getLanguagesData(response.data);
-            }, function errorCallback(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                alert("Error:  " + response)
-            });
+            method: 'GET',
+            url: 'http://api.github.com/users/' + GhUser + '/repos?sort=updated'
+        }).then(function successCallback(response) {
+            $scope.repos = response.data;
+            console.log(response.data[0]);
+            getLanguagesData(response.data);
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            alert("Error:  " + response)
+        });
     }
 
     function getLanguagesData(repos) {
@@ -131,37 +131,47 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                 method: 'GET',
                 url: repos[i].languages_url
 
-            }).then(function successCallback(response){
+            }).then(function successCallback(response) {
                 $scope.languageArray.push(response.data);
-                //console.count('Language Added');
+                //console.count("languages");
+                //console.log($scope.languages)
                 $scope.languages.addObject(response.data);
-                console.log($scope.languages);
-            }, function errCallback(){
+                //console.log($scope.languages);
+            }, function errCallback() {
 
             });
-            
-        }
-        
-    }
-    
 
-    Object.defineProperty(Object.prototype,'addObject',{
-        value: function (newObject){
-            console.log(newObject);
-        for(var language in newObject){
-            console.log("typeof " + language + " " + typeof(this[language]))
-            if(this.hasOwnProperty(language)){
-                //The property exisis, add the newObject value to this
-                //console.log("This[language]" + this[language] + "+ +newObject.language" + newObject.language)
-                this[language] = this[language] + newObject.language;
-            }else{
-                this[language] = +newObject.language;
-            }
         }
-        //console.log(this);
-    },
+
+    }
+
+
+    Object.defineProperty(Object.prototype, 'addObject', {
+        value: function (newObject) {
+            if (!angular.equals(newObject,{})) {
+                
+                console.log("Object isnt empty.  New Object then this");
+                console.log(newObject);
+                console.log(this);
+                for (var language in newObject) {
+                    //console.log("typeof " + language + " " + typeof (this[language]))
+                    if (typeof(this[language]) == 'number') {
+                        //The property exisis, add the newObject value to this
+                        //console.log("This[language]" + this[language] + "+ +newObject.language" + newObject.language)
+                        this[language] += newObject.language;
+                    } else {
+                        //console.log("typeof this language did not equal number")
+                        //console.log(typeof())
+                        this[language] = +newObject.language;
+                    }
+                }
+                
+            }
+
+            //console.log(this);
+        },
         enumerable: false
     });
-    
+
 
 }]);
