@@ -46,7 +46,7 @@
             <!-- LAST UPDATED REPO -->
         <div class="row" >
             <div class="col-md-4">
-                <h3>I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}} which has been keeping me busy.  {{repos[0].name}} is written mainly in {{repos[0].language}}.</h3>
+                <h3>I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}} which has been keeping me busy.  {{repos[0].name}} is written primarily in {{repos[0].language}}.</h3>
             </div>
             <div class="col-md-8">
                 <h1>{{repos[0].name}}</h1>
@@ -57,15 +57,18 @@
         <!-- LAST UPDATED REPO -->
 
         <!-- REPOS -->
-        <div class="row text-center" id="topThree">
+        
+        <div class="row" id="topThree">
             <div class="col-md-12 text-center">
                 <h1>Repositories</h1>
             </div>
-            <div class="col-sm-3 col-md-3 col-lg-3 repo text-center" ng-repeat="repo in repos" >
+        
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 repo text-center" ng-repeat="repo in repos" >
                 <a href="{{repo.url}}">{{repo.name}}</a>
                 <!-- Try and get stats on the repo so you can display.  maybe add ability to filter by language? -->
             </div>
         </div>
+        
         <!-- REPOS -->
         </div>
         
