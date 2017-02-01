@@ -149,20 +149,13 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     Object.defineProperty(Object.prototype, 'addObject', {
         value: function (newObject) {
             if (!angular.equals(newObject,{})) {
-                
-                console.log("Object isnt empty.  New Object then this");
-                console.log(newObject);
-                console.log(this);
                 for (var language in newObject) {
-                    //console.log("typeof " + language + " " + typeof (this[language]))
                     if (typeof(this[language]) == 'number') {
-                        //The property exisis, add the newObject value to this
-                        //console.log("This[language]" + this[language] + "+ +newObject.language" + newObject.language)
-                        this[language] += newObject.language;
+                        this[language] += newObject[language];
                     } else {
                         //console.log("typeof this language did not equal number")
                         //console.log(typeof())
-                        this[language] = +newObject.language;
+                        this[language] = newObject[language];
                     }
                 }
                 
