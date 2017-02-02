@@ -65,7 +65,6 @@ app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubIn
 
 
     function getUserInfo(user) {
-        console.log("gettingUserInfo")
 
         gitHubInfo.setUsername(user);
         $http({
@@ -79,22 +78,13 @@ app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubIn
             $scope.imgUrl = response.data.avatar_url;
             $("#myModal").modal('hide');
         }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-            console.log('User Not Found')
-            //$("#myModal").modal('show');
             alert("User Not Found!")
-            //Reload the page or something here
         });
     };
 
     $scope.submit = function submit() {
-        console.log("submit entered");
-        //Need to remove the div here as well
         if ($scope.gitHubUsername) {
             getUserInfo($scope.gitHubUsername);
-
-            //Hiding the modal this way works but I might want to setup a callback for when the api calls are all finished so the user has something to look at.
         } else {
             //Notify to user to enter soemthing
         }
@@ -110,13 +100,11 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     $scope.languageArray = [];
     $scope.getLanguagesData = getLanguagesData;
     function getRepos(GhUser) {
-        console.log("Getting Repos from the Repo controller");
         $http({
             method: 'GET',
             url: 'http://api.github.com/users/' + GhUser + '/repos?sort=updated'
         }).then(function successCallback(response) {
             $scope.repos = response.data;
-            console.log(response.data[0]);
             getLanguagesData(response.data);
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
@@ -133,10 +121,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
 
             }).then(function successCallback(response) {
                 $scope.languageArray.push(response.data);
-                //console.count("languages");
-                //console.log($scope.languages)
                 $scope.languages.addObject(response.data);
-                //console.log($scope.languages);
             }, function errCallback() {
 
             });
@@ -148,20 +133,16 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
 
     Object.defineProperty(Object.prototype, 'addObject', {
         value: function (newObject) {
-            if (!angular.equals(newObject,{})) {
+            if (!angular.equals(newObject, {})) {
                 for (var language in newObject) {
-                    if (typeof(this[language]) == 'number') {
+                    if (typeof (this[language]) == 'number') {
                         this[language] += newObject[language];
                     } else {
-                        //console.log("typeof this language did not equal number")
-                        //console.log(typeof())
                         this[language] = newObject[language];
                     }
                 }
-                
-            }
 
-            //console.log(this);
+            }
         },
         enumerable: false
     });
