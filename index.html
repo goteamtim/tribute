@@ -17,9 +17,9 @@
     <link href="https://fonts.googleapis.com/css?family=Glass+Antiqua|Suranna" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic" rel="stylesheet">
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="js/app.js"></script>
 </head>
 
@@ -36,78 +36,89 @@
                 <img ng-src="{{imgUrl}}" alt="" class="img-circle" width="200px" height="200px" />
                 <div>
                     <h1>{{tributeUserInfo.data.name}}</h1>
-                    <h3  style="padding-left: 25%; padding-right: 25%;" class="text-center">{{tributeUserInfo.data.bio}}</h3>
-                    
+                    <h3 style="padding-left: 25%; padding-right: 25%;" class="text-center">{{tributeUserInfo.data.bio}}</h3>
+
+</div>
+</div>
+</div>
+
+<div ng-controller="repoController">
+    <!-- LAST UPDATED REPO -->
+    <div class="row">
+        <div class="col-md-4">
+            <h3>I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}} which has been keeping me busy. {{repos[0].name}}
+                is written primarily in {{repos[0].language}}.</h3>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-3">
+                    <h1>{{repos[0].name}}</h1>
+
                 </div>
-            </div>
-        </div>
-        
-        <div ng-controller="repoController">
-            <!-- LAST UPDATED REPO -->
-        <div class="row" >
-            <div class="col-md-4">
-                <h3>I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}} which has been keeping me busy.  {{repos[0].name}} is written primarily in {{repos[0].language}}.</h3>
-            </div>
-            <div class="col-md-8">
-                <h1>{{repos[0].name}}</h1>
-                <h3 style="width:500px;" class="text-center">{{repos[0].description}}</h3>
-                <!-- See if you can get the readme file loaded here?  Could be cool to get data from? -->
-            </div>
-        </div>
-        <!-- LAST UPDATED REPO -->
-
-        <!-- REPOS -->
-        
-        <div class="row" id="topThree">
-            <div class="col-md-12 text-center">
-                <h1>Repositories</h1>
-            </div>
-        
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 repo text-center" ng-repeat="repo in repos" >
-                <a href="{{repo.url}}">{{repo.name}}</a>
-                <!-- Try and get stats on the repo so you can display.  maybe add ability to filter by language? -->
-            </div>
-        </div>
-        
-        <!-- REPOS -->
-        </div>
-        
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-
-
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Welcome!</h4>
+                <div class="col-md-9">
+                    <div id="piechart" style="width: 900px; height: 500px;"></div>
                 </div>
-                <div class="modal-body">
-                    
-                    
-                    <form ng-submit="submit()" >
-                        <p>Enter your Github Username below to get started!</p>
-                        <input type="text" ng-model="gitHubUsername" name="gitHubUsername" />
-                        <input type="submit" id="submit" value="Submit" />
-                        
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+                <div class="row">
+                    <h3 style="width:500px;" class="text-center">{{repos[0].description}}</h3>
+<!-- See if you can get the readme file loaded here?  Could be cool to get data from? -->
+</div>
+</div>
+</div>
+</div>
+<!-- LAST UPDATED REPO -->
 
-        </div>
+<!-- REPOS -->
+
+<div class="row" id="topThree">
+    <div class="col-md-12 text-center">
+        <h1>Repositories</h1>
     </div>
 
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 repo text-center" ng-repeat="repo in repos">
+        <a href="{{repo.url}}">{{repo.name}}</a>
+        <!-- Try and get stats on the repo so you can display.  maybe add ability to filter by language? -->
     </div>
-    <script type="text/javascript">
+</div>
 
-    $("#myModal").modal('show');
+<!-- REPOS -->
+</div>
 
-</script>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Welcome!</h4>
+            </div>
+            <div class="modal-body">
+
+
+                <form ng-submit="submit()">
+                    <p>Enter your Github Username below to get started!</p>
+                    <input type="text" ng-model="gitHubUsername" name="gitHubUsername" />
+                    <input type="submit" id="submit" value="Submit" />
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+<script type="text/javascript">
+
+        $("#myModal").modal('show');
+
+    </script>
 </body>
 
 </html>
