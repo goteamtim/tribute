@@ -130,7 +130,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
 
     }
 
-    function plotGraph() {
+    function plotGraph(title,data/*data is expected to be an array of arrays with two items in each inner array.  The first array is the title of each column*/) {
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
@@ -145,7 +145,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             ]);
 
             var options = {
-                title: 'My Daily Activities'
+                title: title
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
