@@ -105,7 +105,15 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             url: 'http://api.github.com/users/' + GhUser + '/repos?sort=updated'
         }).then(function successCallback(response) {
             $scope.repos = response.data;
-            getLanguagesData(response.data);
+        getLanguagesData(response.data).then(function(){
+            var arrays = [['Task', 'Hours per Day'],
+                ['Work', 11],
+                ['Eat', 2],
+                ['Commute', 2],
+                ['Watch TV', 2],
+['Sleep', 7]];
+            plotGraph("Tim",arrays);
+        });
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -113,8 +121,12 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         });
     }
 
+    
+
     function getLanguagesData(repos) {
-        for (var i = 0, repoLen = repos.length; i < repoLen; i++) {
+        return new Promise(function(resolve, reject) {
+  // do a thing, possibly async, then…
+    for (var i = 0, repoLen = repos.length; i < repoLen; i++) {
             $http({
                 method: 'GET',
                 url: repos[i].languages_url
@@ -122,27 +134,30 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             }).then(function successCallback(response) {
                 $scope.languageArray.push(response.data);
                 $scope.languages.addObject(response.data);
+                if(repoLen == i){
+                    resolve("This worked");
+                }
             }, function errCallback() {
-
+                
             });
-
+            
         }
+  if (true) {
+    //resolve("Stuff worked!");
+  }
+  else {
+    //reject(Error("It broke"));
+  }
+});
 
     }
 
-    function plotGraph(title,data/*data is expected to be an array of arrays with two items in each inner array.  The first array is the title of each column*/) {
+    function plotGraph(title,dataArrays/*data is expected to be an array of arrays with two items in each inner array.  The first array is the title of each column*/) {
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
 
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work', 11],
-                ['Eat', 2],
-                ['Commute', 2],
-                ['Watch TV', 2],
-                ['Sleep', 7]
-            ]);
+            var data = google.visualization.arrayToDataTable(dataArrays);
 
             var options = {
                 title: title
@@ -154,7 +169,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         }
     }
 
-    plotGraph();
+    //plotGraph();
 
     Object.defineProperty(Object.prototype, 'addObject', {
         value: function (newObject) {
