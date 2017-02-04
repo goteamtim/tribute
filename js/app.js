@@ -112,7 +112,14 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                 ['Commute', 2],
                 ['Watch TV', 2],
 ['Sleep', 7]];
-            plotGraph("Tim",arrays);
+            let languageArray = [['Task', 'Hours per Day']];
+            for(var language in $scope.languages){
+                let newLang = [];
+                newLang[0] = language;
+                newLang[1] = $scope.languages[language];
+                languageArray.push(newLang);
+            }
+            plotGraph("Tim",languageArray);
         });
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
@@ -126,6 +133,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     function getLanguagesData(repos) {
         return new Promise(function(resolve, reject) {
   // do a thing, possibly async, then…
+  let count = 0;
     for (var i = 0, repoLen = repos.length; i < repoLen; i++) {
             $http({
                 method: 'GET',
@@ -134,16 +142,19 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             }).then(function successCallback(response) {
                 $scope.languageArray.push(response.data);
                 $scope.languages.addObject(response.data);
-                if(repoLen == i){
+                if(repoLen == count){
                     resolve("This worked");
+                    console.log($scope.languages);
                 }
+                
             }, function errCallback() {
                 
             });
-            
+             count++;
+                //There would be a bug here
         }
-  if (true) {
-    //resolve("Stuff worked!");
+  if (count == repoLen) {
+    resolve("Stuff worked!");
   }
   else {
     //reject(Error("It broke"));
@@ -157,7 +168,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
 
-            var data = google.visualization.arrayToDataTable(dataArrays);
+            var data = google.visualization.arrayToDataTable(dataArrays); 
 
             var options = {
                 title: title
