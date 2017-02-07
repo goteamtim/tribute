@@ -134,25 +134,31 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         return new Promise(function(resolve, reject) {
   // do a thing, possibly async, then…
   let count = 0;
+  let asyncCallArray = [];
     for (var i = 0, repoLen = repos.length; i < repoLen; i++) {
-            $http({
-                method: 'GET',
-                url: repos[i].languages_url
+            // $http({
+            //     method: 'GET',
+            //     url: repos[i].languages_url
 
-            }).then(function successCallback(response) {
-                $scope.languageArray.push(response.data);
-                $scope.languages.addObject(response.data);
-                if(repoLen == count){
-                    resolve("This worked");
-                    console.log($scope.languages);
-                }
+            // }).then(function successCallback(response) {
+            //     $scope.languageArray.push(response.data);
+            //     $scope.languages.addObject(response.data);
+            //     if(repoLen == count){
+            //         resolve("This worked");
+            //         console.log($scope.languages);
+            //     }
                 
-            }, function errCallback() {
+            // }, function errCallback() {
                 
-            });
+            // });
+            asyncCallArray.push(getAsyncCall(repos[i].languages_url));
+            
              count++;
                 //There would be a bug here
         }
+        Promise.all(asyncCallArray).then(function(resolve,reject){
+            resolve("Working");
+        })
   if (count == repoLen) {
     resolve("Stuff worked!");
   }
@@ -180,6 +186,25 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         }
     }
 
+    function getAsyncCall(url){
+        return new Promise(function(resolve,reject){
+            $http({
+                method: 'GET',
+                url: url
+
+            }).then(function successCallback(response) {
+                $scope.languageArray.push(response.data);
+                $scope.languages.addObject(response.data);
+                
+                    resolve("This worked");
+                    console.log($scope.languages);
+                
+                
+            }, function errCallback() {
+                
+            });
+        })
+    }
     //plotGraph();
 
     Object.defineProperty(Object.prototype, 'addObject', {
