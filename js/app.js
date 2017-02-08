@@ -105,7 +105,8 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             url: 'http://api.github.com/users/' + GhUser + '/repos?sort=updated'
         }).then(function successCallback(response) {
             $scope.repos = response.data;
-        getLanguagesData(response.data).then(function(){
+        getLanguagesData(response.data).then(function(resolve,reject){
+            debugger;
             var arrays = [['Task', 'Hours per Day'],
                 ['Work', 11],
                 ['Eat', 2],
@@ -136,35 +137,25 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
   let count = 0;
   let asyncCallArray = [];
     for (var i = 0, repoLen = repos.length; i < repoLen; i++) {
-            // $http({
-            //     method: 'GET',
-            //     url: repos[i].languages_url
+            $http({
+                method: 'GET',
+                url: repos[i].languages_url
 
-            // }).then(function successCallback(response) {
-            //     $scope.languageArray.push(response.data);
-            //     $scope.languages.addObject(response.data);
-            //     if(repoLen == count){
-            //         resolve("This worked");
-            //         console.log($scope.languages);
-            //     }
+            }).then(function successCallback(response) {
+                $scope.languageArray.push(response.data);
+                $scope.languages.addObject(response.data);
+                count++;
+                if(repoLen == count){
+                    resolve("This worked");
+                    console.log($scope.languages);
+                }
                 
-            // }, function errCallback() {
+            }, function errCallback() {
                 
-            // });
-            asyncCallArray.push(getAsyncCall(repos[i].languages_url));
-            
-             count++;
-                //There would be a bug here
+            });
+
         }
-        Promise.all(asyncCallArray).then(function(resolve,reject){
-            resolve("Working");
-        })
-  if (count == repoLen) {
-    resolve("Stuff worked!");
-  }
-  else {
-    //reject(Error("It broke"));
-  }
+
 });
 
     }
