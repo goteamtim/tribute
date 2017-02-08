@@ -106,7 +106,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         }).then(function successCallback(response) {
             $scope.repos = response.data;
         getLanguagesData(response.data).then(function(resolve,reject){
-            debugger;
+            
             var arrays = [['Task', 'Hours per Day'],
                 ['Work', 11],
                 ['Eat', 2],
