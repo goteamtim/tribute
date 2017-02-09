@@ -106,13 +106,6 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         }).then(function successCallback(response) {
             $scope.repos = response.data;
         getLanguagesData(response.data).then(function(resolve,reject){
-            
-            var arrays = [['Task', 'Hours per Day'],
-                ['Work', 11],
-                ['Eat', 2],
-                ['Commute', 2],
-                ['Watch TV', 2],
-['Sleep', 7]];
             let languageArray = [['Task', 'Hours per Day']];
             for(var language in $scope.languages){
                 let newLang = [];
@@ -158,6 +151,11 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
 
 });
 
+    }
+
+    function updateProgressBar(updateAmount,elementID){
+        var bar = document.getElementById(elementID);
+        
     }
 
     function plotGraph(title,dataArrays,elementID) {
