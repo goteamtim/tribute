@@ -120,7 +120,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                 newLang[1] = $scope.languages[language];
                 languageArray.push(newLang);
             }
-            plotGraph("Tim",languageArray);
+            plotGraph("Tim",languageArray,"allLanguagesChart");
         });
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
@@ -160,7 +160,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
 
     }
 
-    function plotGraph(title,dataArrays/*data is expected to be an array of arrays with two items in each inner array.  The first array is the title of each column*/) {
+    function plotGraph(title,dataArrays,elementID) {
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
@@ -171,7 +171,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                 title: title
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            var chart = new google.visualization.PieChart(document.getElementById(elementID));
 
             chart.draw(data, options);
         }
