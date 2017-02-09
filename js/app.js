@@ -155,7 +155,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
 
     function updateProgressBar(updateAmount,elementID){
         var bar = document.getElementById(elementID);
-        
+        bar.style.width = updateAmount + "%";
     }
 
     function plotGraph(title,dataArrays,elementID) {
