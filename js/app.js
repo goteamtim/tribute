@@ -126,18 +126,20 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
 
     function getLanguagesData(repos) {
         return new Promise(function (resolve, reject) {
-            // do a thing, possibly async, then…
             let count = 0;
             let asyncCallArray = [];
+            let progressBarPercent = 100/repos.length;
             for (var i = 0, repoLen = repos.length; i < repoLen; i++) {
                 $http({
                     method: 'GET',
                     url: repos[i].languages_url
 
                 }).then(function successCallback(response) {
+
                     $scope.languageArray.push(response.data);
                     $scope.languages.addObject(response.data);
                     count++;
+                    updateProgressBar(progressBarPercent,"languagesStatus")
                     if (repoLen == count) {
                         resolve("This worked");
                         console.log($scope.languages);
@@ -157,7 +159,11 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         var bar = document.getElementById(elementID);
         let current = bar.style.width;
         current = current.substr(0, current.length - 1);
-        bar.style.width = (current + updateAmount) + "%";
+        console.log(updateAmount)
+        console.log(current)
+        let newTotal = (+current + +updateAmount)
+        console.log(newTotal)
+        bar.style.width = newTotal + "%";
     }
 
     function plotGraph(title, dataArrays, elementID) {
