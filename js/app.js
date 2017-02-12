@@ -105,16 +105,16 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             url: 'http://api.github.com/users/' + GhUser + '/repos?sort=updated'
         }).then(function successCallback(response) {
             $scope.repos = response.data;
-        getLanguagesData(response.data).then(function(resolve,reject){
-            let languageArray = [['Task', 'Hours per Day']];
-            for(var language in $scope.languages){
-                let newLang = [];
-                newLang[0] = language;
-                newLang[1] = $scope.languages[language];
-                languageArray.push(newLang);
-            }
-            plotGraph("Tim",languageArray,"allLanguagesChart");
-        });
+            getLanguagesData(response.data).then(function (resolve, reject) {
+                let languageArray = [['Task', 'Hours per Day']];
+                for (var language in $scope.languages) {
+                    let newLang = [];
+                    newLang[0] = language;
+                    newLang[1] = $scope.languages[language];
+                    languageArray.push(newLang);
+                }
+                plotGraph("Tim", languageArray, "allLanguagesChart");
+            });
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -122,50 +122,50 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         });
     }
 
-    
+
 
     function getLanguagesData(repos) {
-        return new Promise(function(resolve, reject) {
-  // do a thing, possibly async, then…
-  let count = 0;
-  let asyncCallArray = [];
-    for (var i = 0, repoLen = repos.length; i < repoLen; i++) {
-            $http({
-                method: 'GET',
-                url: repos[i].languages_url
+        return new Promise(function (resolve, reject) {
+            // do a thing, possibly async, then…
+            let count = 0;
+            let asyncCallArray = [];
+            for (var i = 0, repoLen = repos.length; i < repoLen; i++) {
+                $http({
+                    method: 'GET',
+                    url: repos[i].languages_url
 
-            }).then(function successCallback(response) {
-                $scope.languageArray.push(response.data);
-                $scope.languages.addObject(response.data);
-                count++;
-                if(repoLen == count){
-                    resolve("This worked");
-                    console.log($scope.languages);
-                }
-                
-            }, function errCallback() {
-                
-            });
+                }).then(function successCallback(response) {
+                    $scope.languageArray.push(response.data);
+                    $scope.languages.addObject(response.data);
+                    count++;
+                    if (repoLen == count) {
+                        resolve("This worked");
+                        console.log($scope.languages);
+                    }
 
-        }
+                }, function errCallback() {
 
-});
+                });
+
+            }
+
+        });
 
     }
 
-    function updateProgressBar(updateAmount,elementID){
+    function updateProgressBar(updateAmount, elementID) {
         var bar = document.getElementById(elementID);
         let current = bar.style.width;
-        current = current.substr(0,current.length-1);
+        current = current.substr(0, current.length - 1);
         bar.style.width = (current + updateAmount) + "%";
     }
 
-    function plotGraph(title,dataArrays,elementID) {
+    function plotGraph(title, dataArrays, elementID) {
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
 
-            var data = google.visualization.arrayToDataTable(dataArrays); 
+            var data = google.visualization.arrayToDataTable(dataArrays);
 
             var options = {
                 title: title
@@ -186,13 +186,13 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     //         }).then(function successCallback(response) {
     //             $scope.languageArray.push(response.data);
     //             $scope.languages.addObject(response.data);
-                
+
     //                 resolve("This worked");
     //                 console.log($scope.languages);
-                
-                
+
+
     //         }, function errCallback() {
-                
+
     //         });
     //     })
     // }
