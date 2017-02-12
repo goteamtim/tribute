@@ -99,6 +99,8 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     $scope.languages = new Object();
     $scope.languageArray = [];
     $scope.getLanguagesData = getLanguagesData;
+    $scope.showProgressBar = true;
+    $scope.languageChartReady = false;
     function getRepos(GhUser) {
         $http({
             method: 'GET',
@@ -142,6 +144,8 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                     updateProgressBar(progressBarPercent,"languagesStatus")
                     if (repoLen == count) {
                         resolve("This worked");
+                        $scope.showProgressBar = false;
+                        $scope.languageChartReady = true;
                         console.log($scope.languages);
                     }
 
@@ -159,10 +163,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         var bar = document.getElementById(elementID);
         let current = bar.style.width;
         current = current.substr(0, current.length - 1);
-        console.log(updateAmount)
-        console.log(current)
         let newTotal = (+current + +updateAmount)
-        console.log(newTotal)
         bar.style.width = newTotal + "%";
     }
 

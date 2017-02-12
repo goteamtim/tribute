@@ -60,13 +60,12 @@
             <!-- Language Data -->
             <div class="row">
                 <div class="col-md-6">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="languagesStatus"
+                    <div class="progress" ng-show="showProgressBar">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" id="languagesStatus"
                             style="width: 0%">
-                            <span class="sr-only">45% Complete</span>
+                        </div>
                     </div>
-                </div>
-                <div id="allLanguagesChart" style="width: 900px; height: 500px;"></div>
+                <div id="allLanguagesChart" style="width: 900px; height: 500px;" ng-show="languageChartReady"></div>
             </div>
             <div class="col-md-6">
                 <p>Here is a distribution of the different languages I code in.  As you can see, my language of choice is clearly {{languages.topLanguage}}</p>
