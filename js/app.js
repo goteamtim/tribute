@@ -177,25 +177,25 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         }
     }
 
-    function getAsyncCall(url){
-        return new Promise(function(resolve,reject){
-            $http({
-                method: 'GET',
-                url: url
+    // function getAsyncCall(url){
+    //     return new Promise(function(resolve,reject){
+    //         $http({
+    //             method: 'GET',
+    //             url: url
 
-            }).then(function successCallback(response) {
-                $scope.languageArray.push(response.data);
-                $scope.languages.addObject(response.data);
+    //         }).then(function successCallback(response) {
+    //             $scope.languageArray.push(response.data);
+    //             $scope.languages.addObject(response.data);
                 
-                    resolve("This worked");
-                    console.log($scope.languages);
+    //                 resolve("This worked");
+    //                 console.log($scope.languages);
                 
                 
-            }, function errCallback() {
+    //         }, function errCallback() {
                 
-            });
-        })
-    }
+    //         });
+    //     })
+    // }
     //plotGraph();
 
     Object.defineProperty(Object.prototype, 'addObject', {
