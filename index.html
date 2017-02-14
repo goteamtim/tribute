@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1>{{repos[0].name}}</h1>
-                    <div id="recentRepoLanGraph" style="width: 900px; height: 500px;"></div>
+                    <div id="recentRepoLanGraph" style="width: 100%; height: 100%;"></div>
                     <h3 style="width:500px;" class="text-center">{{repos[0].description}}</h3>
 
                 </div>
@@ -59,14 +59,14 @@
             <!-- LAST UPDATED REPO -->
 
             <!-- Language Data -->
-            <div class="row">
+            <div class="row" style="background-color: rgba(240, 200, 8, 1)">
                 <div class="col-md-6">
                     <div class="progress" ng-show="showProgressBar">
                         <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" id="languagesStatus"
                             style="width: 0%">
                         </div>
                     </div>
-                <div id="allLanguagesChart" style="width: 900px; height: 500px;" ng-show="languageChartReady"></div>
+                <div id="allLanguagesChart" style="width: 100%; height: 100%; background-color: rgba(240, 200, 8, 1)" ng-show="languageChartReady"></div>
             </div>
             <div class="col-md-6">
                 <p>Here is a distribution of the different languages I code in.  As you can see, my language of choice is clearly {{languages.topLanguage}}</p>

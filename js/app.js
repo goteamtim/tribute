@@ -111,7 +111,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                     method: 'GET',
                     url: response.data[0].languages_url
                 }).then(function successCallback(response) {
-                    let tempLangArray = [['Task', 'Hours per Day']];
+                    let tempLangArray = [['Language', 'Lines of Code']];
                     for(var language in response.data){
                         let formattedLang = [];
                         formattedLang[0] = language;
