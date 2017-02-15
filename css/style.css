@@ -46,3 +46,8 @@ p, h4 {
 .repo:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
+
+#languageData {
+    background-color: rgba(240, 200, 8, 1);
+    min-height: 300px;
+}
