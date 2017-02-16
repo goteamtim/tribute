@@ -44,14 +44,14 @@
 
         <div ng-controller="repoController">
             <!-- LAST UPDATED REPO -->
-            <div class="row">
+            <div class="row" id="lastUpdatedRow">
                 <div class="col-md-4">
                     <h3>I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}} which has been keeping me
                         busy. {{repos[0].name}} is written primarily in {{repos[0].language}}.</h3>
                 </div>
                 <div class="col-md-8">
                     <h1>{{repos[0].name}}</h1>
-                    <div id="recentRepoLanGraph" style="width: 100%; height: 100%;"></div>
+                    <div id="recentRepoLanGraph" class="charts" style="width: 100%; height: 100%;"></div>
                     <h3 style="width:500px;" class="text-center">{{repos[0].description}}</h3>
 
                 </div>
@@ -66,7 +66,7 @@
                             style="width: 0%">
                         </div>
                     </div>
-                <div id="allLanguagesChart" style="width: 100%; height: 100%; background-color: rgba(240, 200, 8, 1)" ng-show="languageChartReady"></div>
+                <div id="allLanguagesChart" class="charts" style="width: 100%; height: 100%; background-color: rgba(240, 200, 8, 1)" ng-show="languageChartReady"></div>
             </div>
             <div class="col-md-6">
                 <p>Here is a distribution of the different languages I code in.  As you can see, my language of choice is clearly {{languages.topLanguage}}</p>

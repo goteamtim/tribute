@@ -118,7 +118,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                         formattedLang[1] = response.data[language];
                         tempLangArray.push(formattedLang);
                     }
-                    plotGraph("",tempLangArray,"recentRepoLanGraph");
+                    plotGraph({title:"",backgroundColor: "#FFF1D0"},tempLangArray,"recentRepoLanGraph");
                 });
             getLanguagesData(response.data).then(function (resolve, reject) {
                 let languageArray = [['Task', 'Hours per Day']];
@@ -128,7 +128,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                     newLang[1] = $scope.languages[language];
                     languageArray.push(newLang);
                 }
-                plotGraph("GitHub Language Usage Data", languageArray, "allLanguagesChart");
+                plotGraph({title:"GitHub Language Usage Data",backgroundColor: "#F0C808"}, languageArray, "allLanguagesChart");
                 
             });
         }, function errorCallback(response) {
@@ -181,16 +181,16 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         bar.style.width = newTotal + "%";
     }
 
-    function plotGraph(title, dataArrays, elementID) {
+    function plotGraph(options, dataArrays, elementID) {
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
 
             var data = google.visualization.arrayToDataTable(dataArrays);
 
-            var options = {
-                title: title
-            };
+            // var options = {
+            //     title: title
+            // };
 
             var chart = new google.visualization.PieChart(document.getElementById(elementID));
 

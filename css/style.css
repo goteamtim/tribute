@@ -51,3 +51,19 @@ p, h4 {
     background-color: rgba(240, 200, 8, 1);
     min-height: 300px;
 }
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.charts {
+    min-height: 400px;
+}
+
+#lastUpdatedRow {
+    background-color: #FFF1D0;
+}
