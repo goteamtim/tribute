@@ -163,10 +163,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                         resolve("This worked");
                         $scope.showProgressBar = false;
                         $scope.languageChartReady = true;
-                        console.log($scope.languages);
                         for(var key in $scope.languages){
-                            console.log($scope.topLanguageCount);
-                            console.log($scope.languages[key]);
                         if($scope.topLanguageCount < +$scope.languages[key] ){
                             $scope.topLanguageCount = +$scope.languages[key];
                             $scope.topLanguage = key;
