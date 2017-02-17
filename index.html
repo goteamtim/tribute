@@ -62,32 +62,35 @@
             <div class="row" id="languageData">
                 <div class="col-md-6">
                     <div class="progress" ng-show="showProgressBar">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" id="languagesStatus"
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="languagesStatus"
                             style="width: 0%">
-                        </div>
                     </div>
+                </div>
                 <div id="allLanguagesChart" class="charts" style="width: 100%; height: 100%; background-color: rgba(240, 200, 8, 1)" ng-show="languageChartReady"></div>
             </div>
             <div class="col-md-6">
-                <p>Here is a distribution of the different languages I code in.  As you can see, my language of choice is clearly {{topLanguage}}</p>
+                <h3>Here is a distribution of the different languages I code in. As you can see, my language of choice is clearly
+                    {{topLanguage}}</h3>
             </div>
         </div>
         <!-- Language Data -->
 
         <!-- REPOS -->
-        <div class="row" id="topThree">
+            <div class="row" id="topThree">
             <div class="row">
-            <div class="col-md-12 text-center">
-                <h1>Repositories</h1>
+                <div class="col-md-12 text-center">
+                    <h1>Repositories</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-md-3 text-center" ng-repeat="repo in repos">
+                    <div class="repo">
+                    <a href="{{repo.url}}">{{repo.name}}</a>
+                    <!-- Try and get stats on the repo so you can display.  maybe add ability to filter by language? -->
+                    </div>
+                </div>
             </div>
             </div>
-                <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 repo text-center col-centered" ng-repeat="repo in repos">
-                <a href="{{repo.url}}">{{repo.name}}</a>
-                <!-- Try and get stats on the repo so you can display.  maybe add ability to filter by language? -->
-            </div>
-            </div>
-        </div>
         <!-- REPOS -->
     </div>
 
