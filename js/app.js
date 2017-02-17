@@ -60,7 +60,7 @@ app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubIn
     //$scope.gitHubUsername = '';
     $scope.tributeUserInfo = {};
     $scope.getUserInfo = getUserInfo;
-    var imgUrl = '';
+    $scope.imgUrl = '';
     //$scope.userRepos = {};
 
 
