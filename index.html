@@ -69,7 +69,7 @@
                 <div id="allLanguagesChart" class="charts" style="width: 100%; height: 100%; background-color: rgba(240, 200, 8, 1)" ng-show="languageChartReady"></div>
             </div>
             <div class="col-md-6">
-                <p>Here is a distribution of the different languages I code in.  As you can see, my language of choice is clearly {{languages.topLanguage}}</p>
+                <p>Here is a distribution of the different languages I code in.  As you can see, my language of choice is clearly {{topLanguage}}</p>
             </div>
         </div>
         <!-- Language Data -->
@@ -82,7 +82,7 @@
             </div>
             </div>
                 <div class="row">
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 repo text-center col-centered" ng-repeat="repo in repos">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 repo text-center col-centered" ng-repeat="repo in repos">
                 <a href="{{repo.url}}">{{repo.name}}</a>
                 <!-- Try and get stats on the repo so you can display.  maybe add ability to filter by language? -->
             </div>

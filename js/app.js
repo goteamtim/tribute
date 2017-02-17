@@ -96,7 +96,9 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     var username = gitHubInfo.getUsername();
     $scope.repos = [];
     $rootScope.getRepos = getRepos;
-    $scope.languages = new Object();
+    $scope.languages = new Object;
+    $scope.topLanguageCount = 0;
+    $scope.topLanguage = "";
     $scope.languageArray = [];
     $scope.getLanguagesData = getLanguagesData;
     $scope.showProgressBar = true;
@@ -155,16 +157,29 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                     $scope.languageArray.push(response.data);
                     $scope.languages.addObject(response.data);
                     count++;
-                    updateProgressBar(progressBarPercent,"languagesStatus")
+                    updateProgressBar(progressBarPercent,"languagesStatus");
+                    
                     if (repoLen == count) {
                         resolve("This worked");
                         $scope.showProgressBar = false;
                         $scope.languageChartReady = true;
                         console.log($scope.languages);
+                        for(var key in $scope.languages){
+                        if($scope.topLanguageCount < +$scope.languages[key] ){
+                            $scope.topLanguage = key;
+                        }
+                    }
                     }
 
-                }, function errCallback() {
-
+                }, function errCallback(response) {
+                    count++;
+                    updateProgressBar(progressBarPercent, "languagesStatus");
+                    if (repoLen == count) {
+                        resolve("Failed but handling");
+                        $scope.showProgressBar = false;
+                        $scope.languageChartReady = true;
+                    }
+                    console.log(response.data.message + " for " + response.config.url);
                 });
 
             }
@@ -185,16 +200,18 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
-
             var data = google.visualization.arrayToDataTable(dataArrays);
-
-            // var options = {
-            //     title: title
-            // };
-
             var chart = new google.visualization.PieChart(document.getElementById(elementID));
-
             chart.draw(data, options);
+        }
+    }
+
+    function getLargestObjProperty(myObject){
+        for (var key in object) {
+            if (object.hasOwnProperty(key)) {
+                var element = object[key];
+                
+            }
         }
     }
 
