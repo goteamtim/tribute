@@ -109,6 +109,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             url: 'http://api.github.com/users/' + GhUser + '/repos?sort=updated'
         }).then(function successCallback(response) {
             $scope.repos = response.data;
+            console.log(response.data);
             $http({
                     method: 'GET',
                     url: response.data[0].languages_url

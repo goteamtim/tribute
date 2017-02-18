@@ -126,6 +126,8 @@
                 <div class="col-sm-3 col-md-3 text-center" ng-repeat="repo in repos">
                     <div class="repo">
                         <a href="{{repo.url}}">{{repo.name}}</a>
+                        <p>Repo Size: {{repo.size}}</p>
+                        <p>Open Issues: {{repo.open_issues}}</p>
                         <!-- Try and get stats on the repo so you can display.  maybe add ability to filter by language? -->
                     </div>
                 </div>
