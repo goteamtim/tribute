@@ -217,6 +217,15 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         }
     }
 
+    function getCommitData(theRepo){
+        $http({
+                    method: 'GET',
+                    url: 'http://api.github.com/repos/' + $scope.GhUser + '/' + theRepo + '/stats/commit_activity'
+                }).then(function successCallback(response) {
+                    $scope.totalCommits = response[0].total;
+                });
+    }
+
     Object.defineProperty(Object.prototype, 'addObject', {
         value: function (newObject) {
             if (!angular.equals(newObject, {})) {
