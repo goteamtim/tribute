@@ -209,12 +209,13 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     }
 
     function getLargestObjProperty(myObject){
-        for (var key in object) {
-            if (object.hasOwnProperty(key)) {
-                var element = object[key];
-                
+        let largestProperty = 0;
+        for (var key in myObject) {
+            if (myObject[key] > largestProperty) {
+                myObject[key] = largestProperty;
             }
         }
+        return largestProperty;
     }
 
     function getCommitData(theRepo){
