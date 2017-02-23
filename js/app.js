@@ -134,6 +134,9 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                 plotGraph({title:"GitHub Language Usage Data",backgroundColor: "#F0C808"}, languageArray, "allLanguagesChart");
                 
             });
+            for(var i = 0; i < response.data.length; i++){
+                getCommitData(response.data[i].name);
+            }
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -161,6 +164,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                     updateProgressBar(progressBarPercent,"languagesStatus");
                     
                     if (repoLen == count) {
+                        //getCommitData(); //This gets the total commits for this repo.  push results into master list
                         resolve("This worked");
                         $scope.showProgressBar = false;
                         $scope.languageChartReady = true;
@@ -208,22 +212,24 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         }
     }
 
-    function getLargestObjProperty(myObject){
+    function getLrgItmFrmArray(myArray,keyToFind){
         let largestProperty = 0;
-        for (var key in myObject) {
-            if (myObject[key] > largestProperty) {
-                myObject[key] = largestProperty;
-            }
+        for (var i = 0; i < myArray.length; i++) {
+            largestProperty += +myArray[i][keyToFind];
+            console.log(typeof(largestProperty))
+            console.log(largestProperty)
         }
+        
         return largestProperty;
     }
 
     function getCommitData(theRepo){
         $http({
                     method: 'GET',
-                    url: 'http://api.github.com/repos/' + $scope.GhUser + '/' + theRepo + '/stats/commit_activity'
+                    url: 'http://api.github.com/repos/goteamtim/' + theRepo + '/stats/commit_activity'
                 }).then(function successCallback(response) {
-                    $scope.totalCommits = response[0].total;
+                    debugger;
+                    $scope.totalCommits += getLrgItmFrmArray(response.data,"total");
                 });
     }
 
