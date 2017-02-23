@@ -71,13 +71,14 @@ app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubIn
             method: 'GET',
             url: 'http://api.github.com/users/' + user
         }).then(function successCallback(response) {
-
+            
             $scope.tributeUserInfo = response;
             gitHubInfo.setUserInfo(response);
             $rootScope.getRepos(user);
             $scope.imgUrl = response.data.avatar_url;
             $("#myModal").modal('hide');
         }, function errorCallback(response) {
+            
             alert("User Not Found!")
         });
     };
@@ -216,8 +217,8 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         let largestProperty = 0;
         for (var i = 0; i < myArray.length; i++) {
             largestProperty += +myArray[i][keyToFind];
-            console.log(typeof(largestProperty))
-            console.log(largestProperty)
+            //console.log(typeof(largestProperty))
+            //console.log(largestProperty)
         }
         
         return largestProperty;
