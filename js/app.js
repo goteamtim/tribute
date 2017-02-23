@@ -135,7 +135,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                 
             });
             for(var i = 0; i < response.data.length; i++){
-                getCommitData(response.data[i].name);
+                getCommitData(response.data[i].name,GhUser);
             }
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
@@ -223,13 +223,14 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         return largestProperty;
     }
 
-    function getCommitData(theRepo){
+    function getCommitData(theRepo,userName){
         $http({
                     method: 'GET',
-                    url: 'http://api.github.com/repos/goteamtim/' + theRepo + '/stats/commit_activity'
+                    url: 'http://api.github.com/repos/' + userName + '/' + theRepo + '/stats/commit_activity'
                 }).then(function successCallback(response) {
                     debugger;
                     $scope.totalCommits += getLrgItmFrmArray(response.data,"total");
+                    console.log()
                 });
     }
 
