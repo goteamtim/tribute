@@ -216,10 +216,13 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     function getLrgItmFrmArray(myArray,keyToFind){
         let largestProperty = 0;
         for (var i = 0; i < myArray.length; i++) {
-            largestProperty += +myArray[i][keyToFind];
-            //console.log(typeof(largestProperty))
-            //console.log(largestProperty)
-        }
+            let value = myArray[i].total;
+            largestProperty += value;
+            if(largestProperty== 0){
+                debugger;
+                console.log("NaN: => " + myArray[i]);
+            }
+        } 
         
         return largestProperty;
     }
@@ -229,9 +232,8 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                     method: 'GET',
                     url: 'http://api.github.com/repos/' + userName + '/' + theRepo + '/stats/commit_activity'
                 }).then(function successCallback(response) {
-                    debugger;
+                    
                     $scope.totalCommits += getLrgItmFrmArray(response.data,"total");
-                    console.log()
                 });
     }
 
