@@ -218,17 +218,13 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         for (var i = 0; i < myArray.length; i++) {
             let value = myArray[i].total;
             largestProperty += value;
-            if(largestProperty== 0){
-                debugger;
-                console.log("NaN: => " + myArray[i]);
-            }
         } 
         
         return largestProperty;
     }
 
     function getCommitData(theRepo,userName){
-        $http({
+        $http({ 
                     method: 'GET',
                     url: 'http://api.github.com/repos/' + userName + '/' + theRepo + '/stats/commit_activity'
                 }).then(function successCallback(response) {
