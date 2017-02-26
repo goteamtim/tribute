@@ -139,8 +139,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                 getCommitData(response.data[i].name,GhUser);
             }
         }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            // called asynchronously if an error occurs or server returns response with an error status.
             alert("Error:  " + response)
         });
     }
@@ -228,8 +227,8 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                     method: 'GET',
                     url: 'http://api.github.com/repos/' + userName + '/' + theRepo + '/stats/commit_activity'
                 }).then(function successCallback(response) {
-                    
-                    $scope.totalCommits += getLrgItmFrmArray(response.data,"total");
+                    $scope.commitsArray.push(response.data);
+                    //$scope.totalCommits += getLrgItmFrmArray(response.data,"total");
                 });
     }
 
