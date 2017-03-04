@@ -78,8 +78,12 @@ app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubIn
             $scope.imgUrl = response.data.avatar_url;
             $("#myModal").modal('hide');
         }, function errorCallback(response) {
-            
-            alert("User Not Found!")
+            //alert(response.data.message)
+            if(response.data.message.includes("API rate limit exceeded for")){
+                alert("Oops, looks like you hit the github api rate limit for this IP.")
+            }else{
+                alert(response.data.message);
+            }
         });
     };
 
@@ -98,6 +102,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
     $scope.repos = [];
     $rootScope.getRepos = getRepos;
     $scope.languages = new Object;
+    $scope.commitsArray = [];
     $scope.topLanguageCount = 0;
     $scope.topLanguage = "";
     $scope.languageArray = [];
@@ -228,7 +233,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                     url: 'http://api.github.com/repos/' + userName + '/' + theRepo + '/stats/commit_activity'
                 }).then(function successCallback(response) {
                     $scope.commitsArray.push(response.data);
-                    //$scope.totalCommits += getLrgItmFrmArray(response.data,"total");
+                    $scope.totalCommits += getLrgItmFrmArray(response.data,"total");
                 });
     }
 
