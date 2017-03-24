@@ -221,6 +221,8 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         let largestProperty = 0;
         for (var i = 0; i < myArray.length; i++) {
             let value = myArray[i].total;
+            console.log("Value: " + value);
+            console.log("TypeOf: " + typeof(value))
             largestProperty += value;
         } 
         
