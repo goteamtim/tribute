@@ -216,6 +216,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             chart.draw(data, options);
         }
     }
+    
 
     function getLrgItmFrmArray(myArray,keyToFind){
         let largestProperty = 0;
@@ -225,7 +226,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
             console.log("TypeOf: " + typeof(value))
             largestProperty += value;
         } 
-        
+        if(isNaN(largestProperty)) return 0;
         return largestProperty;
     }
 
