@@ -228,7 +228,7 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
         } 
         if(isNaN(largestProperty)) return 0;
         return largestProperty;
-    }
+    };
 
     function getCommitData(theRepo,userName){
         $http({ 
