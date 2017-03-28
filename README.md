@@ -1,5 +1,5 @@
 # tribute
-Tribute page for Free Code Camp
+Tribute page for FreeCodeCamp
 
 This is my code for the [Freecodecamp](http://www.freecodecamp.com) [tribute](https://www.freecodecamp.com/challenges/build-a-tribute-page) project.
 
