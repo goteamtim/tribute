@@ -140,9 +140,9 @@ app.controller('repoController', ['$scope', '$http', 'gitHubInfo', '$rootScope',
                 plotGraph({title:"GitHub Language Usage Data",backgroundColor: "#F0C808"}, languageArray, "allLanguagesChart");
                 
             });
-            for(var i = 0; i < response.data.length; i++){
-                getCommitData(response.data[i].name,GhUser);
-            }
+            // for(var i = 0; i < response.data.length; i++){
+            //     getCommitData(response.data[i].name,GhUser);
+            // }
         }, function errorCallback(response) {
             // called asynchronously if an error occurs or server returns response with an error status.
             alert("Error:  " + response)
