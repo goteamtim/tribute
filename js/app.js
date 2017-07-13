@@ -61,6 +61,7 @@ app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubIn
     $scope.tributeUserInfo = {};
     $scope.getUserInfo = getUserInfo;
     $scope.imgUrl = '';
+    $scope.lastUpdated = false;
     //$scope.userRepos = {};
 
 
@@ -76,6 +77,7 @@ app.controller('GitHubController', ['$scope', '$http', '$routeParams', 'gitHubIn
             gitHubInfo.setUserInfo(response);
             $rootScope.getRepos(user);
             $scope.imgUrl = response.data.avatar_url;
+            $scope.lastUpdated = true;
             $("#myModal").modal('hide');
         }, function errorCallback(response) {
             //alert(response.data.message)

@@ -84,7 +84,7 @@
         <div ng-controller="repoController">
             <!-- LAST UPDATED REPO -->
             <div class="row" id="lastUpdatedRow">
-                <div class="col-md-4">
+                <div class="col-md-4" ng-show="lastUpdated">
                     <h3>I most recently updated {{repos[0].name}} on {{repos[0].pushed_at | date}} which has been keeping me
                         busy. {{repos[0].name}} is written primarily in {{repos[0].language}}.</h3>
                 </div>
@@ -129,6 +129,7 @@
                         {{repo.name}}
                         <p>Repo Size: {{repo.size}}</p>
                         <p>Open Issues: {{repo.open_issues}}</p>
+                        <span>{{repo}}</span>
                         <!-- Try and get stats on the repo so you can display.  maybe add ability to filter by language? -->
                     </div>
                     </a>
